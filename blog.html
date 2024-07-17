@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Uploaded Files</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html">Login</a>
+        <a href="blog.html">Blog</a>
+    </nav>
+    <div class="container">
+        <h2>Uploaded Files</h2>
+        <div class="gallery" id="gallery"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const gallery = document.getElementById('gallery');
+
+            function fetchFiles() {
+                gallery.innerHTML = '';
+                const storedFiles = JSON.parse(localStorage.getItem('files')) || [];
+                storedFiles.forEach(file => displayFile(file));
+            }
+
+            function displayFile(file) {
+                const fileContainer = document.createElement('div');
+                fileContainer.style.marginBottom = '20px';
+
+                if (file.type.startsWith('image')) {
+                    const img = document.createElement('img');
+                    img.src = file.url;
+                    img.alt = file.name;
+                    fileContainer.appendChild(img);
+                } else if (file.type.startsWith('video')) {
+                    const video = document.createElement('video');
+                    video.src = file.url;
+                    video.controls = true;
+                    fileContainer.appendChild(video);
+                } else if (file.type === 'application/pdf') {
+                    const iframe = document.createElement('iframe');
+                    iframe.src = file.url;
+                    iframe.classList.add('pdf-viewer');
+                    fileContainer.appendChild(iframe);
+                } else {
+                    const link = document.createElement('a');
+                    link.href = file.url;
+                    link.target = '_blank';
+                    link.textContent = file.name;
+                    fileContainer.appendChild(link);
+                }
+
+                gallery.appendChild(fileContainer);
+            }
+
+            fetchFiles();
+        });
+    </script>
+</body>
+</html>

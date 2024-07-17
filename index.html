@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload and Display</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html">Login</a>
+        <a href="blog.html">Blog</a>
+    </nav>
+    <div class="container">
+        <div id="loginSection">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <input type="submit" value="Login">
+            </form>
+            <p class="error" id="error"></p>
+        </div>
+
+        <div id="uploadSection" class="hidden">
+            <h2>Upload File</h2>
+            <form id="uploadForm">
+                <div class="form-group">
+                    <label for="fileToUpload">Select file to upload:</label>
+                    <input type="file" id="fileToUpload" accept="image/*,video/mp4,video/webm,video/ogg,application/pdf" multiple required>
+                </div>
+                <input type="submit" value="Upload File">
+            </form>
+        </div>
+
+        <div id="fileList" class="hidden">
+            <h2>Uploaded Files</h2>
+            <div class="gallery"></div>
+        </div>
+
+        <p><a href="#" id="logout" class="hidden">Logout</a></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
